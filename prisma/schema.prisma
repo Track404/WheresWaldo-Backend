@@ -14,10 +14,10 @@ datasource db {
 }
 
 model Maps {
-  id           Int     @id @default(autoincrement())
-  name         String
-  charactersId Int[]
-  Users        Users[]
+  id         Int           @id @default(autoincrement())
+  name       String
+  Users      Users[]
+  Characters Chraracters[]
 }
 
 model Users {
@@ -27,4 +27,22 @@ model Users {
   CreateAt DateTime @default(now())
   Maps     Maps     @relation(fields: [mapsId], references: [id], onDelete: Cascade)
   mapsId   Int
+}
+
+model Chraracters {
+  id       Int       @id @default(autoincrement())
+  name     String
+  Maps     Maps      @relation(fields: [mapsId], references: [id], onDelete: Cascade)
+  mapsId   Int
+  position Position?
+}
+
+model Position {
+  id          Int         @id @default(autoincrement())
+  Xmin        Int
+  Xmax        Int
+  Ymin        Int
+  Ymax        Int
+  character   Chraracters @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  characterId Int         @unique
 }

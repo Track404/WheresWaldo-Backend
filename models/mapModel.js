@@ -11,7 +11,7 @@ async function createMap(name) {
 async function getMap(id) {
   const map = await prisma.maps.findUnique({
     where: {
-      id: 99,
+      id: id,
     },
     include: {
       Characters: true,

@@ -1,7 +1,7 @@
 const prisma = require('../prisma/client');
 
 async function createCharacter(name, mapId, Xmin, Xmax, Ymin, Ymax) {
-  const chraracter = await prisma.users.create({
+  const chraracter = await prisma.chraracters.create({
     data: {
       name: name,
       mapsId: mapId,
@@ -21,6 +21,9 @@ async function getCharacter(id) {
   const chraracter = await prisma.chraracters.findUnique({
     where: {
       id: id,
+    },
+    include: {
+      position: true,
     },
   });
   return chraracter;

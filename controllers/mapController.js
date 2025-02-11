@@ -8,7 +8,8 @@ async function CreateMap(req, res) {
 }
 
 async function getMap(req, res) {
-  const map = await mapModel.getMap(Number(req.params.id));
+  const mapId = Number(req.params.id);
+  const map = await mapModel.getMap(mapId);
 
   res.json({ map: map, message: `Get Map ${req.params.id}` });
 }

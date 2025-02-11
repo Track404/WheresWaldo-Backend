@@ -39,10 +39,10 @@ model Chraracters {
 
 model Position {
   id          Int         @id @default(autoincrement())
-  Xmin        Int
-  Xmax        Int
-  Ymin        Int
-  Ymax        Int
+  Xmin        Float
+  Xmax        Float
+  Ymin        Float
+  Ymax        Float
   character   Chraracters @relation(fields: [characterId], references: [id], onDelete: Cascade)
   characterId Int         @unique
 }

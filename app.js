@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const mapRouter = require('./routes/mapRoute');
 const userRouter = require('./routes/userRoute');
-const characterRouter = require('./routes/chracterRoute');
+const characterRouter = require('./routes/characterRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

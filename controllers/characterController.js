@@ -1,9 +1,10 @@
 const characterModel = require('../models/characterModel');
 
 async function createCharacter(req, res) {
-  const { name, mapId, Xmin, Xmax, Ymin, Ymax } = req.body;
+  const { name, imageId, mapId, Xmin, Xmax, Ymin, Ymax } = req.body;
   const chraracter = await characterModel.createCharacter(
     name,
+    Number(imageId),
     Number(mapId),
     Number(Xmin),
     Number(Xmax),
@@ -33,8 +34,18 @@ async function getMapCharacters(req, res) {
     message: `Get characters from Map ${req.params.id}`,
   });
 }
+async function DeleteMapCharacters(req, res) {
+  const mapId = Number(req.params.id);
+  const characters = await characterModel.deleteCharactersByMap(mapId);
+
+  res.json({
+    characters: characters,
+    message: `Delete all characters from Map ${req.params.id}`,
+  });
+}
 module.exports = {
   createCharacter,
   getCharacter,
   getMapCharacters,
+  DeleteMapCharacters,
 };

@@ -21,8 +21,19 @@ async function getMapUsers(req, res) {
 
   res.json({ users: users, message: `Get users from Map ${req.params.id}` });
 }
+
+async function deleteMapUsers(req, res) {
+  const mapId = Number(req.params.id);
+  const users = await userModel.deleteUsersByMap(mapId);
+
+  res.json({
+    characters: users,
+    message: `Delete all users from Map ${req.params.id}`,
+  });
+}
 module.exports = {
   createUser,
   getUser,
   getMapUsers,
+  deleteMapUsers,
 };

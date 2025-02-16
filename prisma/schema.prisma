@@ -32,6 +32,7 @@ model Users {
 model Chraracters {
   id       Int       @id @default(autoincrement())
   name     String
+  imageId  Int
   Maps     Maps      @relation(fields: [mapsId], references: [id], onDelete: Cascade)
   mapsId   Int
   position Position?

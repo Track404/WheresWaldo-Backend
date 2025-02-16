@@ -24,11 +24,25 @@ async function getMapUsers(mapId) {
     where: {
       mapsId: mapId,
     },
+    orderBy: {
+      time: 'asc', // Sorts by name in ascending order
+    },
+    take: 15,
   });
   return users;
+}
+async function deleteUsersByMap(mapId) {
+  const deleteUsers = await prisma.users.deleteMany({
+    where: {
+      mapsId: mapId, // All characters belonging to the map
+    },
+  });
+
+  return deleteUsers;
 }
 module.exports = {
   createUser,
   getUser,
   getMapUsers,
+  deleteUsersByMap,
 };

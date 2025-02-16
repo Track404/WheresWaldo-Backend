@@ -1,9 +1,10 @@
 const prisma = require('../prisma/client');
 
-async function createCharacter(name, mapId, Xmin, Xmax, Ymin, Ymax) {
+async function createCharacter(name, imageId, mapId, Xmin, Xmax, Ymin, Ymax) {
   const chraracter = await prisma.chraracters.create({
     data: {
       name: name,
+      imageId: imageId,
       mapsId: mapId,
       position: {
         create: {
@@ -40,8 +41,19 @@ async function getMapCharacters(mapId) {
   });
   return characters;
 }
+
+async function deleteCharactersByMap(mapId) {
+  const deletedCharacters = await prisma.chraracters.deleteMany({
+    where: {
+      mapsId: mapId, // All characters belonging to the map
+    },
+  });
+
+  return deletedCharacters;
+}
 module.exports = {
   createCharacter,
   getCharacter,
   getMapCharacters,
+  deleteCharactersByMap,
 };
